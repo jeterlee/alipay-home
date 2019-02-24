@@ -1,0 +1,14 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none">
+
+    <com.github.jeterlee.alipayhome.widget.LineGridView
+        android:id="@+id/home_line_gridview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:listSelector="#f1f1f1"
+        android:numColumns="4"
+        android:padding="0dp"/>
+</ScrollView>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="toolbar_elevation">4dp</dimen> <!-- 增加Z轴(有阴影) -->
+    <dimen name="toolbar_drop_down_offset">4dp</dimen>
+    <dimen name="toolbar_title_textSize">18sp</dimen>
+</resources>

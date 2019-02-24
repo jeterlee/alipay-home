@@ -1,0 +1,80 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!-- Toolbar application theme BEGIN -->
+    <!-- toolbar主标题样式 -->
+    <style name="Theme.Toolbar.Title" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <!-- toolbar副标题样式 -->
+    <style name="Theme.Toolbar.SubTitle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle">
+        <item name="android:textColor">#ddd</item>
+    </style>
+
+    <!-- toolbar菜单样式 -->
+    <style name="Theme.Toolbar.Menu" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <!-- 设置-弹窗的背景-颜色 -->
+        <item name="android:colorBackground">@android:color/white</item>
+        <!-- 字体的颜色 -->
+        <item name="android:textColor">@color/toolbar_bg_grey</item>
+        <!-- 菜单的字体颜色 -->
+        <item name="actionMenuTextColor">@color/toolbar_bg_grey</item>
+        <!-- 控件的颜色 -->
+        <item name="colorControlNormal">@color/grey_600</item>
+        <!-- 用于替换菜单的三个小白点,换成自已的图片 -->
+        <item name="actionOverflowButtonStyle">@style/ActionButton.Overflow.Menu</item>
+        <!-- 用于控制menu弹出的位置，位于toolbar的下面，而不是上面 -->
+        <item name="actionOverflowMenuStyle">@style/OverflowMenuStyle</item>
+        <!-- 用于修改item默认的分割线 -->
+        <item name="dropDownListViewStyle">@style/dropDownStyle</item>
+    </style>
+
+    <style name="Theme.Toolbar.Light.Menu" parent="ThemeOverlay.AppCompat.Light">
+        <!-- 设置-弹窗的背景-颜色 -->
+        <item name="android:colorBackground">@color/toolbar_bg_grey</item>
+        <!-- 字体的颜色 -->
+        <item name="android:textColor">@android:color/white</item>
+        <!-- 菜单的字体颜色 -->
+        <item name="actionMenuTextColor">@android:color/white</item>
+        <!-- 控件的颜色 -->
+        <item name="colorControlNormal">@android:color/white</item>
+        <!-- 用于替换菜单的三个小白点,换成自已的图片 -->
+        <item name="actionOverflowButtonStyle">@style/ActionButton.Overflow.Menu</item>
+        <!-- 用于控制 menu 弹出的位置，位于toolbar的下面，而不是上面 -->
+        <item name="actionOverflowMenuStyle">@style/OverflowMenuStyle</item>
+        <!-- 用于修改item默认的分割线 -->
+        <item name="dropDownListViewStyle">@style/dropDownStyle</item>
+    </style>
+
+    <!-- 替换菜单的三个小白点(自定义) -->
+    <style name="ActionButton.Overflow.Menu" parent="android:style/Widget.Holo.Light.ActionButton.Overflow">
+        <item name="android:src">@drawable/ic_more_vertical</item>
+    </style>
+
+    <!-- 设置弹出菜单的风格，设置菜单popup出现位置在toolbar的下方 -->
+    <style name="OverflowMenuStyle" parent="Widget.AppCompat.Light.PopupMenu.Overflow">
+        <!-- 是否覆盖overflow按钮(或设置是否覆盖锚点,默认是覆盖锚点),默认为true,即盖住Toolbar -->
+        <item name="overlapAnchor">false</item>
+        <!-- 弹出框垂直方向上的偏移,即在竖直方向上距离Toolbar的距离,值为负则会盖住Toolbar -->
+        <item name="android:dropDownVerticalOffset">@dimen/toolbar_drop_down_offset</item>
+        <!-- 弹出框水平方向上的偏移,即距离屏幕左边的距离,负值会导致右边出现空隙(没有起作用) -->
+        <item name="android:dropDownHorizontalOffset">@dimen/toolbar_drop_down_offset</item>
+        <!-- 弹出框的宽度 -->
+        <item name="android:dropDownWidth">wrap_content</item>
+        <!-- 弹出层背景颜色 -->
+        <item name="android:popupBackground">@android:color/white</item>
+    </style>
+
+    <!-- 用于修改popmenu的分割线 -->
+    <style name="dropDownStyle" parent="android:style/Widget.Holo.ListView.DropDown">
+    </style>
+
+</resources>
