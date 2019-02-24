@@ -56,8 +56,8 @@ public class IndexDataAdapter extends BaseAdapter {
         if (layoutInflater != null) {
             view = layoutInflater.inflate(R.layout.items_home_menu, null);
 
-            BGABadgeImageView badgeImageView = view.findViewById(R.id.iv_badge);
-            TextView title = view.findViewById(R.id.tv_title);
+            BGABadgeImageView badgeImageView = view.findViewById(R.id.home_iv_badge);
+            TextView title = view.findViewById(R.id.home_tv_title);
 
             title.setText(entity.getTitle());
             if ("0".equals(entity.getNum())) {

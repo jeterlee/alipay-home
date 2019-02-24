@@ -73,6 +73,8 @@ public class DragGridView extends GridView {
     public DragGridView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+
+
     }
 
     /**
@@ -163,9 +165,10 @@ public class DragGridView extends GridView {
             isEdit = true;
 
             /**
-             * 移动的图像背景要有区别,并显示删除按钮
+             * 移动的图像背景要有区别，并显示删除按钮
              */
-            // selectView.findViewById(R.id.item_container).setBackgroundColor(Color.parseColor("#f0f0f0"));
+            selectView.findViewById(R.id.item_container)
+                    .setBackgroundColor(Color.parseColor("#f0f0f0"));
             selectView.findViewById(R.id.delete_img).setVisibility(VISIBLE);
 
             originPosition = position;

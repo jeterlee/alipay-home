@@ -17,9 +17,9 @@ import android.widget.GridView;
  * @author <a href="https://www.github.com/jeterlee"></a>
  * @date 2019/2/23 0023
  */
-public class MenuManagerView extends GridView {
+public class MenuGridView extends GridView {
 
-    public MenuManagerView(Context context, AttributeSet attrs) {
+    public MenuGridView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 

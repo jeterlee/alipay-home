@@ -10,7 +10,7 @@
     android:orientation="vertical">
 
     <cn.bingoogolapple.badgeview.BGABadgeImageView
-        android:id="@+id/iv_badge"
+        android:id="@+id/home_iv_badge"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_gravity="center_horizontal"
@@ -23,7 +23,7 @@
         app:badge_verticalMargin="0dp"/>
 
     <TextView
-        android:id="@+id/tv_title"
+        android:id="@+id/home_tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"

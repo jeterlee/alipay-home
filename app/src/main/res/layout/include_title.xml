@@ -10,8 +10,8 @@
     android:elevation="@dimen/toolbar_elevation"
     android:fitsSystemWindows="true"
     android:minHeight="?attr/actionBarSize"
-    app:contentInsetStart="0dp"
     android:theme="@style/Theme.Toolbar.Light.Menu"
+    app:contentInsetStart="0dp"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
     app:subtitleTextAppearance="@style/Theme.Toolbar.SubTitle"
     app:titleTextAppearance="@style/Theme.Toolbar.Title">

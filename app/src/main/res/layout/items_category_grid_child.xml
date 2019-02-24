@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.github.jeterlee.alipayhome.widget.MenuGridView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/menu_manager_view"
+    android:id="@+id/category_mgv_grid_child"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#ffffff"

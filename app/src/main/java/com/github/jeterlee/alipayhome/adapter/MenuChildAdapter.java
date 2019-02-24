@@ -18,6 +18,11 @@ import java.util.List;
  * Title: MenuChildAdapter
  * Description: 全部待选择的菜单，要添加的单个 menu 适配器，此适配器绑定拖动上标，
  * 是属于 {@link MenuParentAdapter} 的子适配器，仅供其使用。
+ *
+ * Description: {@link MenuParentAdapter} 是整个整个菜单排列的框架，称为菜单的父适配器，
+ *  * {@link MenuChildAdapter} 是每个菜单的适配器，包含菜单的加减图标，图标，菜单名字，称为菜单的子适配器。
+ *  * 原理：将菜单的子适配器 {@link MenuChildAdapter} 放到 菜单的父适配器 {@link MenuParentAdapter}
+ *  * 完成整个布局（双重菜单适配器）。
  * </pre>
  *
  * @author <a href="https://www.github.com/jeterlee"></a>
@@ -51,21 +56,67 @@ public class MenuChildAdapter extends BaseAdapter {
         return position;
     }
 
+    // @Override
+    // public View getView(int position, View convertView, ViewGroup parent) {
+    //     ViewHolder viewHolder;
+    //     if (convertView == null) {
+    //         convertView = LayoutInflater.from(mContext).inflate(R.layout.items_category_child, null);
+    //         viewHolder = new ViewHolder();
+    //         viewHolder.nameText = convertView.findViewById(R.id.name_text);
+    //         viewHolder.deleteImg = convertView.findViewById(R.id.delete_img);
+    //         viewHolder.iconImg = convertView.findViewById(R.id.icon_img);
+    //         convertView.setTag(viewHolder);
+    //     } else {
+    //         viewHolder = (ViewHolder) convertView.getTag();
+    //     }
+    //
+    //     final MenuEntity menuEntity = menuList.get(position);
+    //     if (isEdit) {
+    //         viewHolder.deleteImg.setVisibility(View.VISIBLE);
+    //         if (menuEntity.isSelect()) {
+    //             viewHolder.deleteImg.setBackgroundResource(R.mipmap.menu_select);
+    //         } else {
+    //             viewHolder.deleteImg.setBackgroundResource(R.mipmap.menu_add);
+    //         }
+    //     } else {
+    //         viewHolder.deleteImg.setVisibility(View.GONE);
+    //     }
+    //     viewHolder.deleteImg.setOnClickListener(new View.OnClickListener() {
+    //         @Override
+    //         public void onClick(View v) {
+    //             if (!menuEntity.isSelect()) {
+    //                 mManager.addMenu(menuEntity);
+    //             }
+    //         }
+    //     });
+    //
+    //     // 获取资源图片
+    //     int drawableId = mContext.getResources().getIdentifier(menuEntity.getIco(),
+    //             "mipmap", mContext.getPackageName());
+    //     viewHolder.iconImg.setImageResource(drawableId);
+    //
+    //     // Glide.with(mContext).load(menuEntity.getIco()).placeholder(R.mipmap.ic_launcher)
+    //     //         .error(R.mipmap.ic_launcher).into(viewHolder.iconImg);
+    //
+    //     viewHolder.nameText.setText(menuEntity.getTitle());
+    //     return convertView;
+    // }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
         if (convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.items_category_child, null);
             viewHolder = new ViewHolder();
-            viewHolder.childName = convertView.findViewById(R.id.child_name);
+            viewHolder.nameText = convertView.findViewById(R.id.name_text);
             viewHolder.deleteImg = convertView.findViewById(R.id.delete_img);
             viewHolder.iconImg = convertView.findViewById(R.id.icon_img);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-
         final MenuEntity menuEntity = menuList.get(position);
+
         if (isEdit) {
             viewHolder.deleteImg.setVisibility(View.VISIBLE);
             if (menuEntity.isSelect()) {
@@ -79,6 +130,9 @@ public class MenuChildAdapter extends BaseAdapter {
         viewHolder.deleteImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // datas.remove(position);
+                // String key = AppConfig.KEY_USER;
+                // appContext.saveObject((Serializable) datas, key);
                 if (!menuEntity.isSelect()) {
                     mManager.addMenu(menuEntity);
                 }
@@ -90,15 +144,15 @@ public class MenuChildAdapter extends BaseAdapter {
                 "mipmap", mContext.getPackageName());
         viewHolder.iconImg.setImageResource(drawableId);
 
-        // Glide.with(mContext).load(menuEntity.getIco()).placeholder(R.mipmap.ic_launcher)
-        //         .error(R.mipmap.ic_launcher).into(viewHolder.iconImg);
+//		Glide.with(mContext).load(menuEntity.getIco()).placeholder(R.mipmap.ic_launcher)
+//				.error(R.mipmap.ic_launcher).into(viewHodler.iconImg);
 
-        viewHolder.childName.setText(menuEntity.getTitle());
+        viewHolder.nameText.setText(menuEntity.getTitle());
         return convertView;
     }
 
     private class ViewHolder {
-        private TextView childName;
+        private TextView nameText;
         private ImageView deleteImg, iconImg;
     }
 

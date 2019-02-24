@@ -12,14 +12,17 @@ import android.widget.TextView;
 
 import com.github.jeterlee.alipayhome.R;
 import com.github.jeterlee.alipayhome.entity.MenuEntity;
-import com.github.jeterlee.alipayhome.widget.MenuManagerView;
+import com.github.jeterlee.alipayhome.widget.MenuGridView;
 
 import java.util.List;
 
 /**
  * <pre>
  * Title: MenuParentAdapter
- * Description: 全部带选择的菜单（要添加的 menu，即“所有的应用”）
+ * Description: {@link MenuParentAdapter} 是整个整个菜单排列的框架，称为菜单的父适配器，
+ * {@link MenuChildAdapter} 是每个菜单的适配器，包含菜单的加减图标，图标，菜单名字，称为菜单的子适配器。
+ * 原理：将菜单的子适配器 {@link MenuChildAdapter} 放到 菜单的父适配器 {@link MenuParentAdapter}
+ * 完成整个布局（双重菜单适配器）。
  * </pre>
  *
  * @author <a href="https://www.github.com/jeterlee"></a>
@@ -51,20 +54,20 @@ public class MenuParentAdapter extends BaseExpandableListAdapter
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild,
                              View convertView, ViewGroup parent) {
-        convertView = inflater.inflate(R.layout.items_menu_manager, null);
-        MenuManagerView menuManagerView = convertView.findViewById(R.id.menu_manager_view);
+        convertView = inflater.inflate(R.layout.items_category_grid_child, null);
+        MenuGridView menuGridView = convertView.findViewById(R.id.category_mgv_grid_child);
         // 设置每行列数
-        menuManagerView.setNumColumns(4);
+        menuGridView.setNumColumns(4);
         // 位置居中
-        menuManagerView.setGravity(Gravity.CENTER);
+        menuGridView.setGravity(Gravity.CENTER);
         // 水平间隔
         // menuManagerView.setHorizontalSpacing(10);
         MenuChildAdapter adapter = new MenuChildAdapter(mManager,
                 menuList.get(groupPosition).getChilds(), isEdit);
         // 设置菜单 Adapter
-        menuManagerView.setAdapter(adapter);
-        menuManagerView.setOnItemClickListener(this);
-        menuManagerView.setOnItemLongClickListener(this);
+        menuGridView.setAdapter(adapter);
+        menuGridView.setOnItemClickListener(this);
+        menuGridView.setOnItemLongClickListener(this);
         return convertView;
     }
 
@@ -94,7 +97,7 @@ public class MenuParentAdapter extends BaseExpandableListAdapter
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.items_category_parent, null);
             groupViewHolder = new GroupViewHolder();
-            groupViewHolder.categoryName = convertView.findViewById(R.id.category_name);
+            groupViewHolder.categoryName = convertView.findViewById(R.id.parent_tv_category_name);
             convertView.setTag(groupViewHolder);
         } else {
             groupViewHolder = (GroupViewHolder) convertView.getTag();

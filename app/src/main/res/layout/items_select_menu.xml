@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/item_container"
+    android:id="@+id/litem_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@android:color/white">
 
     <LinearLayout
@@ -15,24 +13,24 @@
         android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/icon_img"
+            android:id="@+id/licon_img"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginTop="10dp"/>
 
         <TextView
-            android:id="@+id/name_tv"
+            android:id="@+id/lname_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:layout_marginBottom="10dp"
+            android:text=""
             android:textColor="#999999"
-            android:textSize="12sp"
-            tools:text="名字"/>
+            android:textSize="12sp"/>
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/iv_delete_img"
+        android:id="@+id/ldelete_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"

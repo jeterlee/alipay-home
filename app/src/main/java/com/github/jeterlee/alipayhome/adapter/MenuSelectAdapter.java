@@ -27,7 +27,8 @@ import java.util.List;
  * @author <a href="https://www.github.com/jeterlee"></a>
  * @date 2019/2/23 0023
  */
-public class MenuSelectAdapter extends BaseAdapter implements DragGridView.DragAdapter {
+public class MenuSelectAdapter extends BaseAdapter implements
+        DragGridView.DragAdapter {
     private boolean isEdit = false;
     private List<MenuEntity> menuList;
     private CategoryManager mManager;
@@ -61,25 +62,26 @@ public class MenuSelectAdapter extends BaseAdapter implements DragGridView.DragA
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
+        MenuEntity bean = menuList.get(position);
         ViewHolder holder;
         if (convertView == null) {
             holder = new ViewHolder();
             convertView = LayoutInflater.from(mContext).inflate(R.layout.items_select_menu, null);
-            holder.deleteImg = convertView.findViewById(R.id.delete_img);
-            holder.iconImg = convertView.findViewById(R.id.icon_img);
-            holder.nameTv = convertView.findViewById(R.id.name_tv);
-            holder.container = convertView.findViewById(R.id.item_container);
+            holder.deleteImg = convertView.findViewById(R.id.ldelete_img);
+            holder.iconImg = convertView.findViewById(R.id.licon_img);
+            holder.nameText = convertView.findViewById(R.id.lname_text);
+            holder.container = convertView.findViewById(R.id.litem_container);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-
         holder.deleteImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mManager.deleteMenu(menuList.get(position), position);
                 menuList.remove(position);
-                FileUtils.saveObject(mContext, (Serializable) menuList, Config.KEY_USER_TEMP);
+                String key = Config.KEY_USER_TEMP;
+                FileUtils.saveObject(mContext, (Serializable) menuList, key);
             }
         });
         if (isEdit) {
@@ -87,7 +89,7 @@ public class MenuSelectAdapter extends BaseAdapter implements DragGridView.DragA
         } else {
             holder.deleteImg.setVisibility(View.GONE);
         }
-        MenuEntity bean = menuList.get(position);
+
         // 获取资源图片
         int drawableId = mContext.getResources()
                 .getIdentifier(bean.getIco(), "mipmap", mContext.getPackageName());
@@ -98,7 +100,7 @@ public class MenuSelectAdapter extends BaseAdapter implements DragGridView.DragA
         //         .error(R.mipmap.ic_launcher)
         //         .into(holder.iconImg);
 
-        holder.nameTv.setText(bean.getTitle());
+        holder.nameText.setText(bean.getTitle());
         holder.container.setBackgroundColor(Color.WHITE);
         return convertView;
     }
@@ -106,7 +108,7 @@ public class MenuSelectAdapter extends BaseAdapter implements DragGridView.DragA
     class ViewHolder {
         ImageView deleteImg;
         ImageView iconImg;
-        TextView nameTv;
+        TextView nameText;
         View container;
     }
 
