@@ -17,7 +17,6 @@ public class MenuEntity implements Serializable {
     private String title;
     private String ico;
     private String sort;
-    private String num = "0";
     private boolean select = false;
     private List<MenuEntity> childs;
 
@@ -67,13 +66,5 @@ public class MenuEntity implements Serializable {
 
     public void setSort(String sort) {
         this.sort = sort;
-    }
-
-    public String getNum() {
-        return num;
-    }
-
-    public void setNum(String num) {
-        this.num = num;
     }
 }

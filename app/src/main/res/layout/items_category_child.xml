@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- item_container, icon_img, delete_img 固定的id，不能更改
+     此处的id，会在 DragGridView 中使用（配置全部的应用） -->
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/item_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -20,14 +23,14 @@
             android:src="@mipmap/ic_launcher"/>
 
         <TextView
-            android:id="@+id/name_text"
+            android:id="@+id/child_tv_name_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:layout_marginBottom="10dp"
-            android:text="menu1"
             android:textColor="#999999"
-            android:textSize="12sp"/>
+            android:textSize="12sp"
+            tools:text="menu"/>
     </LinearLayout>
 
     <ImageView
@@ -36,6 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
         android:background="@mipmap/menu_add"/>
 </FrameLayout>

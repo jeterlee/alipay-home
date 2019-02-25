@@ -9,13 +9,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.github.jeterlee.alipayhome.Config;
 import com.github.jeterlee.alipayhome.R;
 import com.github.jeterlee.alipayhome.drag.DragGridView;
 import com.github.jeterlee.alipayhome.entity.MenuEntity;
-import com.github.jeterlee.alipayhome.util.FileUtils;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -67,10 +64,10 @@ public class MenuSelectAdapter extends BaseAdapter implements
         if (convertView == null) {
             holder = new ViewHolder();
             convertView = LayoutInflater.from(mContext).inflate(R.layout.items_select_menu, null);
-            holder.deleteImg = convertView.findViewById(R.id.ldelete_img);
-            holder.iconImg = convertView.findViewById(R.id.licon_img);
-            holder.nameText = convertView.findViewById(R.id.lname_text);
-            holder.container = convertView.findViewById(R.id.litem_container);
+            holder.deleteImg = convertView.findViewById(R.id.delete_img);
+            holder.iconImg = convertView.findViewById(R.id.icon_img);
+            holder.nameText = convertView.findViewById(R.id.select_tv_name_text);
+            holder.container = convertView.findViewById(R.id.item_container);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -80,8 +77,6 @@ public class MenuSelectAdapter extends BaseAdapter implements
             public void onClick(View v) {
                 mManager.deleteMenu(menuList.get(position), position);
                 menuList.remove(position);
-                String key = Config.KEY_USER_TEMP;
-                FileUtils.saveObject(mContext, (Serializable) menuList, key);
             }
         });
         if (isEdit) {
@@ -94,12 +89,6 @@ public class MenuSelectAdapter extends BaseAdapter implements
         int drawableId = mContext.getResources()
                 .getIdentifier(bean.getIco(), "mipmap", mContext.getPackageName());
         holder.iconImg.setImageResource(drawableId);
-
-        // Glide.with(mContext).load(bean.getIco())
-        //         .placeholder(R.mipmap.ic_launcher)
-        //         .error(R.mipmap.ic_launcher)
-        //         .into(holder.iconImg);
-
         holder.nameText.setText(bean.getTitle());
         holder.container.setBackgroundColor(Color.WHITE);
         return convertView;
@@ -117,7 +106,6 @@ public class MenuSelectAdapter extends BaseAdapter implements
         if (endPosition < menuList.size()) {
             MenuEntity object = menuList.remove(startPosition);
             menuList.add(endPosition, object);
-            FileUtils.saveObject(mContext, (Serializable) menuList, Config.KEY_USER_TEMP);
             notifyDataSetChanged();
         }
     }

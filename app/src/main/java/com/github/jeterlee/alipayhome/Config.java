@@ -10,9 +10,7 @@ package com.github.jeterlee.alipayhome;
  * @date 2019/2/23 0023
  */
 public class Config {
-    public final static String FILE_NAME = "menulist";
-    public final static String KEY_USER = "Users";
-    // 临时保存
-    public final static String KEY_USER_TEMP = "UsersTemp";
-    public final static String KEY_ALL = "All";
+    public final static String USER_MENU_DATA_FILE_NAME = "user_menu.json";
+    public final static String MENU_DATA_FILE_NAME = "menu_list.json";
+    public final static String USER_MENU_DATA = "user_menu";
 }

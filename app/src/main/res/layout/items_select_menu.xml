@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- item_container, icon_img, delete_img 固定的id，不能更改
+     此处的id，会在 DragGridView 中使用（配置已选择的应用） -->
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/litem_container"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white">
@@ -13,28 +16,29 @@
         android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/licon_img"
+            android:id="@+id/icon_img"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginTop="10dp"/>
 
         <TextView
-            android:id="@+id/lname_text"
+            android:id="@+id/select_tv_name_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:layout_marginBottom="10dp"
-            android:text=""
             android:textColor="#999999"
-            android:textSize="12sp"/>
+            android:textSize="12sp"
+            tools:text="menu"/>
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/ldelete_img"
+        android:id="@+id/delete_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:paddingTop="10dp"
+        android:paddingEnd="10dp"
         android:paddingRight="10dp"
         android:src="@mipmap/menu_del"
         android:visibility="gone"/>

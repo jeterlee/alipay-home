@@ -31,21 +31,49 @@ import java.util.List;
  * @author <a href="https://www.github.com/jeterlee"></a>
  * @date 2019/2/23 0023
  */
-public class HomeActivity extends AppCompatActivity {
-    private LineGridView lineGridView;
-    private List<MenuEntity> indexDataAll = new ArrayList<>();
-    private List<MenuEntity> indexDataList = new ArrayList<>();
-    private IndexDataAdapter adapter;
+public class HomeActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+    private List<MenuEntity> indexUserMenuData = new ArrayList<>();
+    IndexDataAdapter adapter;
+    MenuEntity menuEntity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        lineGridView = findViewById(R.id.home_line_gridview);
+        LineGridView lineGridView = findViewById(R.id.home_line_gridview);
         lineGridView.setFocusable(false);
+        indexUserMenuData = (List<MenuEntity>) FileUtils.
+                readObject(getApplicationContext(), Config.USER_MENU_DATA);
+        if (indexUserMenuData == null) {
+            indexUserMenuData = getDefaultMenuData();
+            FileUtils.saveObject(getApplicationContext(), (Serializable) indexUserMenuData, Config.USER_MENU_DATA);
+        }
+        menuEntity = new MenuEntity();
+        lineGridView.setOnItemClickListener(this);
+        adapter = new IndexDataAdapter(this, indexUserMenuData);
+        lineGridView.setAdapter(adapter);
+    }
 
-        String jsonString = FileUtils.getJson(this, Config.FILE_NAME);
-        Logger.e(jsonString);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (indexUserMenuData != null) {
+            indexUserMenuData.clear();
+        }
+        indexUserMenuData = (List<MenuEntity>) FileUtils.
+                readObject(getApplicationContext(), Config.USER_MENU_DATA);
+        menuEntity.setIco("all_big_ico");
+        menuEntity.setId("-1");
+        menuEntity.setTitle("全部");
+        indexUserMenuData.add(menuEntity);
+        adapter.setList(indexUserMenuData);
+    }
+
+    private List<MenuEntity> getDefaultMenuData() {
+        List<MenuEntity> menuEntities = new ArrayList<>();
+        String jsonString = FileUtils.getJson(getApplicationContext(),
+                Config.USER_MENU_DATA_FILE_NAME);
+        // Logger.e(jsonString);
         // 将 JSON 的 String 转成一个 JsonArray 对象
         JsonArray jsonArray = new JsonParser().parse(jsonString).getAsJsonArray();
         Gson gson = new Gson();
@@ -53,53 +81,22 @@ public class HomeActivity extends AppCompatActivity {
         for (JsonElement indexArr : jsonArray) {
             // 使用 Gson，直接转成 Bean 对象
             MenuEntity menuEntity = gson.fromJson(indexArr, MenuEntity.class);
-            indexDataAll.add(menuEntity);
+            menuEntities.add(menuEntity);
         }
-
-        // 复制
-        FileUtils.saveObject(getApplicationContext(), (Serializable) indexDataAll, Config.KEY_ALL);
-        List<MenuEntity> indexDataUser = (List<MenuEntity>) FileUtils.readObject(getApplicationContext(), Config.KEY_USER);
-        if (indexDataUser == null || indexDataUser.size() == 0) {
-            FileUtils.saveObject(getApplicationContext(), (Serializable) indexDataAll, Config.KEY_USER);
-        }
-        // indexDataList = (List<MenuEntity>) FileUtils.readObject(getApplicationContext(), Config.KEY_USER);
-
-        // MenuEntity allMenuEntity = new MenuEntity();
-        // allMenuEntity.setIco("");
-        // allMenuEntity.setId("all");
-        // allMenuEntity.setTitle("全部");
-        // indexDataList.add(allMenuEntity);
-        // adapter = new IndexDataAdapter(this, indexDataList);
-        // lineGridView.setAdapter(adapter);
-
-        lineGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent();
-                // Bundle bundle = new Bundle();
-                String title = indexDataList.get(position).getTitle();
-                String strId = indexDataList.get(position).getId();
-                Logger.i(title + strId);
-                // 点击更多
-                if ("all".equals(strId)) {
-                    intent.setClass(HomeActivity.this, MenuManageActivity.class);
-                    startActivity(intent);
-                }
-            }
-        });
+        return menuEntities;
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        indexDataList.clear();
-        indexDataList = (List<MenuEntity>) FileUtils.readObject(getApplicationContext(), Config.KEY_USER);
-        MenuEntity allMenuEntity = new MenuEntity();
-        allMenuEntity.setIco("all_big_ico");
-        allMenuEntity.setId("all");
-        allMenuEntity.setTitle("全部");
-        indexDataList.add(allMenuEntity);
-        adapter = new IndexDataAdapter(HomeActivity.this, indexDataList);
-        lineGridView.setAdapter(adapter);
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intent = new Intent();
+        // Bundle bundle = new Bundle();
+        String title = indexUserMenuData.get(position).getTitle();
+        String strId = indexUserMenuData.get(position).getId();
+        Logger.i(title + strId);
+        // 点击更多
+        if ("-1".equals(strId)) {
+            intent.setClass(HomeActivity.this, MenuManageActivity.class);
+            startActivity(intent);
+        }
     }
 }

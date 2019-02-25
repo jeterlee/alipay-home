@@ -55,17 +55,10 @@ public class IndexDataAdapter extends BaseAdapter {
         MenuEntity entity = list.get(position);
         if (layoutInflater != null) {
             view = layoutInflater.inflate(R.layout.items_home_menu, null);
-
             BGABadgeImageView badgeImageView = view.findViewById(R.id.home_iv_badge);
             TextView title = view.findViewById(R.id.home_tv_title);
-
             title.setText(entity.getTitle());
-            if ("0".equals(entity.getNum())) {
-                badgeImageView.hiddenBadge();
-            } else {
-                badgeImageView.showTextBadge(entity.getNum());
-            }
-
+            badgeImageView.hiddenBadge();
             // 获取资源图片
             int drawableId = context.getResources()
                     .getIdentifier(entity.getIco(), "mipmap", context.getPackageName());
@@ -85,5 +78,10 @@ public class IndexDataAdapter extends BaseAdapter {
             // badgeImageView.getBadgeViewHelper().setBadgeBorderColorInt(Color.parseColor("#0000FF"));
         }
         return view;
+    }
+
+    public void setList(List<MenuEntity> list) {
+        this.list = list;
+        notifyDataSetChanged();
     }
 }
