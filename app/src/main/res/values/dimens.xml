@@ -3,4 +3,8 @@
     <dimen name="toolbar_elevation">4dp</dimen> <!-- 增加Z轴(有阴影) -->
     <dimen name="toolbar_drop_down_offset">4dp</dimen>
     <dimen name="toolbar_title_textSize">18sp</dimen>
+
+    <dimen name="app_bar_height">180dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
 </resources>
