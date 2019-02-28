@@ -2,7 +2,6 @@ package com.github.jeterlee.alipayhome.widget;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
@@ -61,8 +60,8 @@ public class LineGridView extends GridView {
             localPaint2.setStrokeWidth(1);
             // localPaint.setColor(Color.parseColor("#e5e5e5"));
             // localPaint2.setColor(Color.parseColor("#e5e5e5"));
-            localPaint.setColor(Color.WHITE);
-            localPaint2.setColor(Color.WHITE);
+            localPaint.setAlpha(0);
+            localPaint2.setAlpha(0);
             for (int i = 0; i < childCount; i++) {
                 View cellView = getChildAt(i);
                 if ((i + 1) % column != 0) {
